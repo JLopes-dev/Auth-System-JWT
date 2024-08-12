@@ -1,5 +1,6 @@
-package com.auth.Rest.models;
+package com.auth.models;
 
+import com.auth.DTOs.UserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,13 @@ public class User implements UserDetails {
 
     private String username;
     private String password;
+
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

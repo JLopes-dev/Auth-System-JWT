@@ -1,6 +1,6 @@
-package com.auth.Rest.repositories;
+package com.auth.repositories;
 
-import com.auth.Rest.models.User;
+import com.auth.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
