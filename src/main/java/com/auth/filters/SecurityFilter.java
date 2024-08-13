@@ -26,7 +26,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = getHeader(request);
+        String token = jwtService.getHeader(request);
         if (token != null) {
             String subject = jwtService.verifyTokenJwt(token);
             UserDetails user = repository.findByUsername(subject);
@@ -34,13 +34,5 @@ public class SecurityFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authToken);
         }
         filterChain.doFilter(request, response);
-    }
-
-    private String getHeader(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token != null) {
-            return token.replace("Bearer", "").trim();
-        }
-        return null;
     }
 }

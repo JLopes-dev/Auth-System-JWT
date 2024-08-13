@@ -24,7 +24,9 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-
+    public void updatePassword(String password){
+        this.password = password;
+    }
     public User(String username, String password) {
         this.username = username;
         this.password = password;

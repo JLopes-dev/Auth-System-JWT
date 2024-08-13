@@ -5,6 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,14 @@ public class JwtService {
         } catch (JWTVerificationException exception){
             throw new RuntimeException("Token Expirado ou Inválido", exception);
         }
+    }
+
+    public String getHeader(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        if (token != null) {
+            return token.replace("Bearer", "").trim();
+        }
+        return null;
     }
 
     private Instant expiresAt(){
