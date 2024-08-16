@@ -37,4 +37,10 @@ public class UserService implements UserDetailsService {
         }
         return null;
     }
+
+    public User getUserByTokenJwt(HttpServletRequest request){
+        String header = jwtService.getHeader(request);
+        String username = jwtService.verifyTokenJwt(header);
+        return (User) repository.findByUsername(username);
+    }
 }
